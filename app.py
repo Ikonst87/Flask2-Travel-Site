@@ -2,14 +2,12 @@ from flask import Flask, render_template
 
 import data
 
-tours = data.tours
-
 app = Flask(__name__)
 
 
 @app.route("/")
 def main():
-    return render_template('index.html', departures=data.departures, title=data.title, tours=tours)
+    return render_template('index.html', departures=data.departures, title=data.title, tours=data.tours)
 
 
 @app.route("/departures/<departure>/")
@@ -20,7 +18,7 @@ def render_departure(departure):
         return render_template('error.html', departures=data.departures, title=data.title, type='departure',
                                id=departure), 404
     tours_dep = {}
-    for tour_id, tour_data in tours.items():
+    for tour_id, tour_data in data.tours.items():
         if tour_data["departure"] == departure:
             tours_dep[tour_id] = tour_data
 
@@ -32,7 +30,7 @@ def render_departure(departure):
 def render_tours(id):
     tour_id = int(id)
     try:
-        tour = tours[tour_id]
+        tour = data.tours[tour_id]
         dep_city = data.departures[tour["departure"]].replace("Из", "из")
     except KeyError:
         return render_template('error.html', departures=data.departures, title=data.title, type='tour', id=id), 404
