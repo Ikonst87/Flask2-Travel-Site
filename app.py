@@ -17,7 +17,8 @@ def render_departure(departure):
     try:
         dep_city = data.departures[departure].replace("Из", "из")
     except KeyError:
-        return "Нет такого направления", 404
+        return render_template('error.html', departures=data.departures, title=data.title, type='departure',
+                               id=departure), 404
     tours_dep = {}
     for tour_id, tour_data in tours.items():
         if tour_data["departure"] == departure:
@@ -34,9 +35,9 @@ def render_tours(id):
         tour = tours[tour_id]
         dep_city = data.departures[tour["departure"]].replace("Из", "из")
     except KeyError:
-        return "Такого тура у нас нет", 404
+        return render_template('error.html', departures=data.departures, title=data.title, type='tour', id=id), 404
     return render_template('tour.html', departures=data.departures, title=data.title, tour=tour, dep_city=dep_city)
 
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(debug=True)
