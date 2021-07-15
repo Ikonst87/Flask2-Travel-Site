@@ -213,3 +213,9 @@ fabric.properties
 
 #Static files (images, videos and etc)
 /static/
+/.idea/.gitignore
+/.idea/Flask2-Travel-Site.iml
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/inspectionProfiles/profiles_settings.xml
+/.idea/vcs.xml
