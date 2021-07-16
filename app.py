@@ -38,4 +38,4 @@ def render_tours(id):
 
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run()
