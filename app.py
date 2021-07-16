@@ -7,7 +7,8 @@ app = Flask(__name__)
 
 @app.route("/")
 def main():
-    return render_template('index.html', departures=data.departures, title=data.title, tours=data.tours)
+    return render_template('index.html', departures=data.departures, title=data.title, subtitle=data.subtitle,
+                           description=data.description, tours=data.tours)
 
 
 @app.route("/departures/<departure>/")
@@ -21,7 +22,6 @@ def render_departure(departure):
     for tour_id, tour_data in data.tours.items():
         if tour_data["departure"] == departure:
             tours_dep[tour_id] = tour_data
-
     return render_template('departure.html', departures=data.departures, title=data.title, tours=tours_dep,
                            dep_city=dep_city)
 
@@ -38,4 +38,4 @@ def render_tours(id):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)

@@ -1,14 +1,13 @@
 {% extends 'base.html' %}
 
 {% block wrapper_content %}
-{% set min_price = tours.values()|list()|min(attribute="price") %}
-{% set max_price = tours.values()|list()|max(attribute="price") %}
-{% set min_duration = tours.values()|list()|min(attribute="nights") %}
-{% set max_duration = tours.values()|list()|max(attribute="nights") %}
+{% set min_price = (tours.values()|list()|min(attribute="price")).price %}
+{% set max_price = (tours.values()|list()|max(attribute="price")).price %}
+{% set min_duration = (tours.values()|min(attribute="nights")).nights %}
+{% set max_duration = (tours.values()|max(attribute="nights")).nights %}
 <h1 class="display-5 mt-4">Летим {{dep_city}}</h1>
-<p class="mb-4">Найдено {{tours|length()}} тура, от {{min_price.price}} до {{max_price.price}} и от
-    {{min_duration.nights}} ночей до
-    {{max_duration.nights}} ночей</p>
+<p class="mb-4">Найдено {{tours|length()}} тура, от {{min_price}} до {{max_price}} и от {{min_duration}} ночей до
+    {{max_duration}} ночей</p>
 <!-- CARDS -->
 <div class="row mt-5">
     {% for tour_id, tour_data in tours.items() %}
